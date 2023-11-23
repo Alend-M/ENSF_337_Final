@@ -4,9 +4,10 @@
 class Seat{
 
     private:
-    int Row;    //Seat row 
-    int Column; //Seat column
+    int row;    //Seat row 
+    int column; //Seat column
     char SLetter; //Letter for the seat
+    char status; 
 };
 
 #endif

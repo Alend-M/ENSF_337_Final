@@ -1,7 +1,7 @@
-#ifndef Passenger
-#define Passenger
+#ifndef Passanger
+#define Passanger
 
-class Passenger{
+class Passanger{
 	
 	
 	private:

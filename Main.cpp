@@ -2,12 +2,14 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+//#include "Flight.h"
 using namespace std;
 //*****NOTES*****
 // Use vector use for list
 // Use String C++ class for strings
 // Bonus mark if we use a link list  (10%)
 //*****ENDNOTE*****
+
 void ChoicePage(int *UserInput);
 void SeatMap();
 void PassengerInfo();
@@ -29,11 +31,14 @@ int main()
     //Main Program loop
     while (true)         
     {
+        //Generates data
+        Flight f;
+        f = populate_flight("Flights.txt");
+           
         ChoicePage(&UserInput);
         switch (UserInput)
         {
         case 1:
-
             // Display the flight seat map.
             SeatMap();
 
@@ -87,7 +92,7 @@ int main()
             cout << "<<< Press Return to Continue>>>" << endl;
             cin.get();
             break;
-            
+
         }
     }
     return 0;
@@ -113,7 +118,7 @@ void SeatMap(){
 }
 
 void PassengerInfo(){
-
+    //Use linked list 
 }
 
 void AddPassanger(){
