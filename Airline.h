@@ -7,7 +7,7 @@ using namespace std;
 class Airline{
     private: 
         string name();
-        vector <Flight> flights;
+        vector <Flight> flights; //Make linked list 
         int num_flights; 
 
 };

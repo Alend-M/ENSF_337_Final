@@ -2,7 +2,8 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
-//#include "Flight.h"
+#include "Flight.h"
+#include <fstream>
 using namespace std;
 //*****NOTES*****
 // Use vector use for list
@@ -10,6 +11,7 @@ using namespace std;
 // Bonus mark if we use a link list  (10%)
 //*****ENDNOTE*****
 
+Flight populate_flight (char * file);
 void ChoicePage(int *UserInput);
 void SeatMap();
 void PassengerInfo();
@@ -28,13 +30,13 @@ int main()
     cout << "<<< Press Return to Continue>>>" << endl;
     cin.get(); 
 
+    //Pull data from file 
+    char file[] = "Flights.txt";
+    Flight populate_flight (*file);
+
     //Main Program loop
     while (true)         
     {
-        //Generates data
-        Flight f;
-        f = populate_flight("Flights.txt");
-           
         ChoicePage(&UserInput);
         switch (UserInput)
         {
@@ -111,6 +113,16 @@ void ChoicePage(int *UserInput)
     cout << "Enter your choice: (1, 2, 3, 4, 5 or 6)"<<endl;
     cin >> *UserInput;
     cin.get();
+}
+
+Flight populate_flight (char * file){
+    ifstream f;
+    f.open(file, ios::in);
+    if (f.fail()){
+        cout <<"Error opening file...quitting\n";
+        exit(1);
+    }
+    cout <<"I CAN READ THE FILE!!!";
 }
 
 void SeatMap(){

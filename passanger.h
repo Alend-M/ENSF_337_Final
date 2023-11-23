@@ -1,5 +1,9 @@
 #ifndef Passanger
 #define Passanger
+#include <string>
+#include "Seat.h"
+#include "passanger.h"
+using namespace std;
 
 class Passanger{
 	
@@ -9,6 +13,7 @@ class Passanger{
 	char Lname;
 	//*Phone number make linked list
 	int id;
+	Seat seat;
 	
 };
 
