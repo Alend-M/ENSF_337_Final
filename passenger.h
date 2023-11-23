@@ -5,8 +5,8 @@ class Passenger{
 	
 	
 	private:
-	char fname;
-	char lname;
+	char Fname;
+	char Lname;
 	//*Phone number make linked list
 	int id;
 	
