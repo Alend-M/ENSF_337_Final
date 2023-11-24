@@ -1,13 +1,13 @@
-#ifndef Passanger
-#define Passanger
+#ifndef PASSANGER
+#define PASSANGER
 #include <string>
 #include "Seat.h"
-#include "passanger.h"
 using namespace std;
 
 class Passanger{
-	
-	
+	public: 
+	Passanger();
+
 	private:
 	char Fname;
 	char Lname;
