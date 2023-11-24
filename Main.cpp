@@ -126,11 +126,34 @@ Flight populate_flight (char * file){
 }
 
 void SeatMap(){
+    //Displays the SeatMap
+    void SeatMap() {
+    vector<vector<int>> seatmap = flight.get_seatmap();
 
+    cout << "Aircraft Seat Map" << endl;
+    cout << "  ";
+    for (int i = 0; i < seatmap[0].size(); i++) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    // Print the seat map rows.
+    for (int i = 0; i < seatmap.size(); i++) {
+        cout << i << " ";
+        for (int j = 0; j < seatmap[i].size(); j++) {
+            if (seatmap[i][j] == 0) {
+                cout << "O ";
+            } else {
+                cout << "X ";
+            }
+        }
+        cout << endl;
+    }
+}
 }
 
 void PassengerInfo(){
-    //Use linked list 
+    
 }
 
 void AddPassanger(){
