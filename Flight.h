@@ -9,7 +9,7 @@ class Flight{
 
     public:
     Flight();
-    Flight(char *Flight_Number, int tRows, int tColumns, vector<Passanger> *passangerVector);
+    Flight(char *Flight_Number, int tRows, int tColumns,vector<Passanger>& p);
     ~Flight();
 
     string get_Flight_Number()const;

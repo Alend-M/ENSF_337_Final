@@ -1,5 +1,7 @@
 #include "Flight.h"
 #include "passanger.h"
+#include <string>
+#include <vector>
 using namespace std; 
 
 Flight::Flight() {
@@ -8,28 +10,24 @@ Flight::Flight() {
     TColumns = 0;
     vector <Passanger> passangers;
     vector <vector<int>> seatmap;
-}
-
-Flight::Flight(char *Flight_Number, int tRows, int tColumns, vector<Passanger> *passangerVector) {
-    Trows = tRows;
-    TColumns = tColumns;
-    passangers = *passangerVector;
-    string FNumber(Flight_Number);
-    vector <vector<int>> seatmap;  
-
-    // Allocate memory for the 2D seat map
-    seatmap.resize(tRows, vector<int>(tColumns));
-    // Initialize all seats to empty
-    for (int i = 0; i < tRows; i++) {
-        for (int j = 0; j < tColumns; j++) {
-            seatmap[i][j] = 0;  
+    seatmap.resize(Trows, vector<int>(TColumns));
+    for (int i = 0; i < Trows; ++i) {
+        for (int j = 0; j < TColumns; ++j) {
+            seatmap[i][j] = 0;
         }
     }
-    //!!!!CHECK IF NEED TO  BE FIXED !!!!!
-    for(int c = 0; c < sizeof(passangers); c++){
-                //Checks each passanger in passangers vector. Then if status is true gets their row and colum and sets the matrix to 1 
-        if (passangers.at(c).getStatus() == true){ //change if not correct!!!!
-            seatmap[passangers.at(c).getrow()][passangers.at(c).getcolumn()] = 1; //Change if not correct!!!!
+}
+
+Flight::Flight(char *Flight_Number, int tRows, int tColumns, vector<Passanger>& p) {
+    string FNumber(Flight_Number);
+    Trows = tRows;
+    TColumns = tColumns;
+    vector <Passanger> passangers = p; 
+    vector <vector<int>> seatmap;
+    seatmap.resize(Trows, vector<int>(TColumns));
+    for (int i = 0; i < Trows; ++i) {
+        for (int j = 0; j < TColumns; ++j) {
+            seatmap[i][j] = 0;
         }
     }
 }

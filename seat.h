@@ -1,8 +1,7 @@
 
 //seat.h
-
 #ifndef SEATS
-#def SEATS
+#define SEATS
 
 #include <iostream>
 using namespace std;
@@ -22,7 +21,7 @@ class Seat {
 		const int get_row() const;
 		//Returns 'row_S'
 		
-		const char get_col_char() const:
+		const char get_col_char() const;
 		//Returns 'col_Letter_S'
 		
 		const char get_col_int() const;
@@ -41,3 +40,4 @@ class Seat {
 		int valid_row_S(int r);		//making sure row value is valid
 		char valid_col_letter_S(char c);	//making sure char value is valid
 }
+#endif

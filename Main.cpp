@@ -126,6 +126,28 @@ Flight populate_flight (char * file){
 }
 
 void SeatMap(){
+    //Populate seat map 
+            //B/C it involved passanger class and seat class has to be populated in the main function 
+
+    /*vector <vector<int>> seatmap;  
+    // Allocate memory for the 2D seat map
+    seatmap.resize(tRows, vector<int>(tColumns));
+    // Initialize all seats to empty
+    for (int i = 0; i < tRows; i++) {
+        for (int j = 0; j < tColumns; j++) {
+            seatmap[i][j] = 0;  
+        }
+    }
+    //!!!!CHECK IF NEED TO  BE FIXED !!!!!
+    for(int c = 0; c < sizeof(passangers); c++){
+                //Checks each passanger in passangers vector. Then if status is true gets their row and colum and sets the matrix to 1 
+        if (passangers.at(c).getStatus() == true){ //change if not correct!!!!
+            seatmap[passangers.at(c).get_row()][passangers.at(c).get_col_int()] = 1; //Change if not correct!!!!
+        }
+    }
+}
+*/
+
     //Displays the SeatMap
     void SeatMap() {
     vector<vector<int>> seatmap = flight.get_seatmap();
