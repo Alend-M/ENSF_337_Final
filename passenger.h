@@ -1,5 +1,6 @@
 #include <string>
 
+
 #ifndef Passenger
 #define Passenger
 
@@ -11,14 +12,13 @@ using namespace std;
 
 class Passenger{
 	public:
-	Passenger(string first_name, string last_name, string _num, int id_num, Seat seat);
-	void setFname(const char* fname);
-	void setLname(const char* lname);
-	void setId(const string* id);
-	void setPhone(const string* phone);
-	Passenger get_all() const {return Passenger}
+	Passenger(string fn, string ln, string num, int id_num, Seat seat);
 	
-	Passenger getPassenger() const;
+	string getFname() const {return fname};
+	string getLname() const {return lname};
+	string getPhone() const {return phone};
+	string getId() const {return id};
+	Seat getSeat() const (return seat);
 	
 	private:
 	string fname;
@@ -26,7 +26,5 @@ class Passenger{
 	string phone;
 	int id;
 	Seat seat;
-	
 };
-
 #endif
