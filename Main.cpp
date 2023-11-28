@@ -22,6 +22,9 @@ void Save();
 
 int main()
 {
+    string fname, lname, phone;
+    int row;
+    char col;
     int UserInput;
     cout << "\nVersion 1.0" << endl;
     cout << "Term Project - Flight Management Program in C++" << endl;
@@ -116,13 +119,20 @@ void ChoicePage(int *UserInput)
 }
 
 Flight populate_flight (char * file){
-    ifstream f;
-    f.open(file, ios::in);
-    if (f.fail()){
+    //should be every 20 character 
+    ifstream in;
+    in.open(file, ios::in);
+    if (in.fail()){
         cout <<"Error opening file...quitting\n";
         exit(1);
     }
-    cout <<"I CAN READ THE FILE!!!";
+    /*do{
+        in.get(s,'21','\n');
+        if(int.eof())break; 
+        fname = s;
+        fname= trimtraling_spaces(fname); //removes the trailing spaces 
+    }
+    */
 }
 
 void SeatMap(){
@@ -187,5 +197,6 @@ void RemovePassanger(){
 }
 
 void Save(){
-
+//out<< iosflage(ios::left)
+//<<setw(20)<<fname;
 }

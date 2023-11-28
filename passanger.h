@@ -11,10 +11,9 @@ class Passanger{
 	private:
 	char Fname;
 	char Lname;
-	//*Phone number make linked list
+	string phoneNumber; 
 	int id;
 	Seat seat;
-	
 };
 
 #endif

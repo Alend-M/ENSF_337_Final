@@ -27,7 +27,7 @@ class Flight{
     void freeSeat();
 
     private:
-    string FNumber(); //Flight number
+    string FNumber; //Flight number
     vector <Passanger> passangers; //list of passangers 
     vector <vector<int>> seatmap;  
     int Trows; //Total number of rows

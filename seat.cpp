@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-Seat::Seat(int r, char c) {
+Seat::Seat(int r, int c) {
   row_S = r;
   col_S = c;
 }
@@ -18,6 +18,9 @@ void Seat::set_col(int c){
 
 int Seat::get_row() const {
   return row_S;
+}
+int Seat::get_col() const{
+	return col_S;
 }
 
 // Returns the seat address in the format "row_numbercolumn_letter" (e.g., "8A")
