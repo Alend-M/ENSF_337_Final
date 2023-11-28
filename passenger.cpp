@@ -1,13 +1,12 @@
 #include "passenger.h"
+#include <string>
 
-//displaypassengerlist();
-//pressEnter(); to pause program
+using namespace std;
 
-//addpassenger(f);
-//break;
-
-Passanger::Passanger((string first_name, string last_name, string phone_num, int id_num){
-	fname = first_name;
-	lname = last_name; 
+Passanger::Passanger((string fn, string ln, string phone_num, int id_num, int r, int c){
+	fname = fn;
+	lname = ln; 
 	phone = phone_num;
 	id = id_num;
+	Seat(r, c);
+}
