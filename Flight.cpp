@@ -70,7 +70,7 @@ void Flight::addPassanger(Passanger newPassanger) {
 
 void Flight::removePassanger(string IDNum) {
     for (vector<Passanger>::iterator it = passangers.begin(); it != passangers.end(); ++it) {
-        if (it->get_ID() == IDNum) {   //!!Change based on passport function
+        if (it->get_ID() == IDNum) {   
             passangers.erase(it);
             break;
         }

@@ -145,12 +145,11 @@ void SeatMap(){
             seatmap[passangers.at(c).get_row()][passangers.at(c).get_col_int()] = 1; //Change if not correct!!!!
         }
     }
-}
 */
-
+}
     //Displays the SeatMap
     void SeatMap() {
-    vector<vector<int>> seatmap = flight.get_seatmap();
+    /*vector<vector<int>> seatmap = flight.get_seatmap();
 
     cout << "Aircraft Seat Map" << endl;
     cout << "  ";
@@ -171,8 +170,9 @@ void SeatMap(){
         }
         cout << endl;
     }
+    */
 }
-}
+
 
 void PassengerInfo(){
     
