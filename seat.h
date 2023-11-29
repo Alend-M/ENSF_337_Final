@@ -7,8 +7,8 @@ using namespace std;
 
 class Seat {
 	public: 
+		Seat();
 		Seat(int r, int c);
-		//REQUIRES: 'r' and 'c' refers to the row number and the character of the column (ex: 8A) 
 
 		void set_row(int r);
 		void set_col(int c);
@@ -17,7 +17,7 @@ class Seat {
 		int get_col() const;
 		int get_seat_address(int address[]) const; 
 	private:
-		int row_S;				//seat row number
-		int col_S;				//seat column number
+		int row_S; //seat row number
+		int col_S; //seat column number
 };
 #endif

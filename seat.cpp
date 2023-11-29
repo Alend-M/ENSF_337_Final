@@ -3,7 +3,10 @@
 #include "seat.h"
 #include <iostream>
 using namespace std;
-
+Seat::Seat(){
+  row_S = -1; 
+  col_S = -1; 
+}
 Seat::Seat(int r, int c) {
   row_S = r;
   col_S = c;
