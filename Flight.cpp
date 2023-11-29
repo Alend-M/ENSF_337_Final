@@ -1,5 +1,6 @@
 #include "Flight.h"
 #include "passenger.h"
+#include "Seat.h"
 #include <string>
 #include <vector>
 using namespace std; 
@@ -34,70 +35,46 @@ Flight::~Flight() {
     seatmap.clear();
 }
 
-string Flight::get_Flight_Number() const {
-    return FNumber;
-}
-
-vector<Passenger> Flight::get_PassengerList() const {
-    return passengers;
-}
-
-vector<vector<int>> Flight::get_seatmap() const {
-    return seatmap;
-}
-
-int Flight::get_Trows() const {
-    return Trows;
-}
-
-int Flight::get_TColumns() const {
-    return TColumns;
-}
-
 void Flight::set_Flight_Number(string newFlightNumber) {
     FNumber = newFlightNumber;
 }
 
-void Flight::addPassenger(Passenger newPassenger) {
-    passengers.push_back(newPassenger);
+string Flight::addPassenger(Passenger newPassenger) {
+    for (vector<Passenger>::iterator it = passengers.begin(); it != passengers.end(); ++it) {
+        //if id is already used on the flight return error
+        if(newPassenger.getId() == it->getId()){
+            return "ID already taken!";
+        }
+
+        //checks if the seat is alreadt occupied 
+        if(newPassenger.getSeat().get_col() == it->getSeat().get_col() 
+        && newPassenger.getSeat().get_row() == it->getSeat().get_row()){
+            return "Seat is already occupied!";
+        }
+    }
+
+    //checks list of passangers from bottom to top. If adding 
+    for (vector<Passenger>::reverse_iterator it = passengers.rbegin(); it != passengers.rend(); ++it) {
+        if (newPassenger.getId() > it->getId()) {
+            // Insert the new passenger after the current passenger
+            passengers.insert(it.base() + 1, newPassenger);
+            break; // Once inserted, stop iterating
+        }
+    }
+    //If Id is less then all passangers insert to the begining of the list 
+    if (passengers.empty() || newPassenger.getId() < passengers.front().getId()) {
+        passengers.insert(passengers.begin(), newPassenger);
+    }
 }
 
-void Flight::removePassenger(string IDNum) {
+
+void Flight::removePassenger(int IDNum) {
     for (vector<Passenger>::iterator it = passengers.begin(); it != passengers.end(); ++it) {
-        if (it->get_ID() == IDNum) {   
+        if (it->getId() == IDNum) {   
             passengers.erase(it);
             break;
         }
     }
 }
 
-void Flight::ClaimSeat(Passenger passenger, int row, int column) {
-    if (row < 0 || row >= Trows || column < 0 || column >= TColumns) {
-        cout << "Invalid seat coordinates" << endl;
-        return;
-    }
 
-    if (seatmap[row][column] == 1) {
-        cout << "Seat is already occupied" << endl;
-        return;
-    }
-
-    seatmap[row][column] = 1;
-    passenger.setStatus(true);
-    passenger.setRow(row);
-    passenger.setColumn(column);
-}
-
-void Flight::freeSeat(int row, int column) {
-    if (row < 0 || row >= Trows || column < 0 || column >= TColumns) {
-        cout << "Invalid seat coordinates" << endl;
-        return;
-    }
-
-    if (seatmap[row][column] == 0) {
-        cout << "Seat is already empty" << endl;
-        return;
-    }
-
-    seatmap[row][column] = 0;
-}
