@@ -65,6 +65,9 @@ string Flight::addPassenger(Passenger newPassenger) {
     if (passengers.empty() || newPassenger.getId() < passengers.front().getId()) {
         passengers.insert(passengers.begin(), newPassenger);
     }
+
+    //Puting row and col into seatmap
+    seatmap[newPassenger.getSeat().get_row()][newPassenger.getSeat().get_col()] = 1;
 }
 
 

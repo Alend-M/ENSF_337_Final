@@ -15,7 +15,7 @@ class Passenger{
 	string getLname() const {return lname;};
 	string getPhone() const {return phone;};
 	int getId() const {return id;};
-	Seat getSeat(){seat;};
+	Seat getSeat(){return seat;};
 	
 	void set_ID(int idInput){id = idInput;};
 

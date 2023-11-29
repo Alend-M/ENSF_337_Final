@@ -20,6 +20,7 @@ void RemovePassanger();
 void Save();
 
 
+
 int main()
 {
     string fname, lname, phone;
@@ -34,8 +35,11 @@ int main()
     cin.get(); 
 
     //Pull data from file 
+    
+    #if 0
     char file[] = "Flights.txt";
     Flight populate_flight (*file);
+    #endif
 
     //Main Program loop
     while (true)         
@@ -119,6 +123,7 @@ void ChoicePage(int *UserInput)
 }
 
 Flight populate_flight (char * file){
+    #if 0
     //should be every 20 character 
     ifstream in;
     in.open(file, ios::in);
@@ -126,64 +131,67 @@ Flight populate_flight (char * file){
         cout <<"Error opening file...quitting\n";
         exit(1);
     }
-    /*do{
+    do{
         in.get(s,'21','\n');
         if(int.eof())break; 
         fname = s;
-        fname= trimtraling_spaces(fname); //removes the trailing spaces 
+        fname = (string) trimtraling_spaces(fname); //removes the trailing spaces 
     }
-    */
+    #endif
 }
 
-void SeatMap(){
-    //Populate seat map 
-            //B/C it involved passanger class and seat class has to be populated in the main function 
 
-    /*vector <vector<int>> seatmap;  
-    // Allocate memory for the 2D seat map
-    seatmap.resize(tRows, vector<int>(tColumns));
-    // Initialize all seats to empty
-    for (int i = 0; i < tRows; i++) {
-        for (int j = 0; j < tColumns; j++) {
-            seatmap[i][j] = 0;  
-        }
-    }
-    //!!!!CHECK IF NEED TO  BE FIXED !!!!!
-    for(int c = 0; c < sizeof(passangers); c++){
-                //Checks each passanger in passangers vector. Then if status is true gets their row and colum and sets the matrix to 1 
-        if (passangers.at(c).getStatus() == true){ //change if not correct!!!!
-            seatmap[passangers.at(c).get_row()][passangers.at(c).get_col_int()] = 1; //Change if not correct!!!!
-        }
-    }
-*/
-}
-    //Displays the SeatMap
-    void SeatMap() {
-    /*vector<vector<int>> seatmap = flight.get_seatmap();
+
+void SeatMap() {
+    //vector<vector<int>> seatmap = //NAMEOFFLIGHT//.get_seatmap();    //THIS GRABS THE VECTOR WE NEED FILE READ TO WORK THO!
+    #if 0
+    vector<vector<int>> seatmap;
+    seatmap.resize(6, vector<int>(4)); // Create a 6x4 vector of integers
+
+    // Manually set the seatmap values
+    seatmap[0][0] = 1; // Occupied seat
+    seatmap[1][3] = 1; // Occupied seat
+    seatmap[3][2] = 1; // Occupied seat
+    seatmap[5][1] = 1; // Occupied seat
+    #endif
 
     cout << "Aircraft Seat Map" << endl;
-    cout << "  ";
+    cout <<"     ";
     for (int i = 0; i < seatmap[0].size(); i++) {
-        cout << i << " ";
+        cout << (char) (i + 65) <<"   ";
     }
     cout << endl;
 
-    // Print the seat map rows.
-    for (int i = 0; i < seatmap.size(); i++) {
-        cout << i << " ";
-        for (int j = 0; j < seatmap[i].size(); j++) {
-            if (seatmap[i][j] == 0) {
-                cout << "O ";
-            } else {
-                cout << "X ";
-            }
+    //Holds the position of the Seatmap
+    int row = 0;
+    int col = 0; 
+    for(int j = 0; j < seatmap.size(); j++){
+        cout << "   +";
+        for(int i = 0; i < seatmap[0].size(); i++){
+            cout<<"---+";
         }
-        cout << endl;
+        cout<<endl;
+
+        cout << " " << row << " "<< "|";
+        for(int i = 0; i < seatmap[0].size(); i++){
+            char a = ' ';
+            if(seatmap[row][col] == 1){
+                a = 'X';
+            }
+            //cout << row<< col;
+            cout << " " << a << " " << "|";
+            col++;
+        } 
+        cout <<endl;
+        row++;
+        col = 0; 
     }
-    */
+    cout << "   +";
+        for(int i = 0; i < seatmap[0].size(); i++){
+            cout<<"---+";
+        }
+        cout<<endl;
 }
-
-
 void PassengerInfo(){
     
 }
