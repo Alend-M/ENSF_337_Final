@@ -14,10 +14,10 @@ using namespace std;
 Flight populate_flight (char * file);
 void ChoicePage(int *UserInput);
 void SeatMap();
-void PassengerInfo();
-void AddPassanger();
-void RemovePassanger();
-void Save();
+void PassengerInfo(Flight& SkyCar);
+void AddPassanger(Flight& SkyCar);
+void RemovePassanger(Flight& SkyCar);
+void Save(Flight& SkyCar);
 
 
 
@@ -33,9 +33,9 @@ int main()
 
     //Pull data from file 
     
-    #if 0
+    #if 1
     char file[] = "Flights.txt";
-    Flight populate_flight (*file);
+    Flight F1 = populate_flight (*file);
     #endif
 
     //Main Program loop
@@ -55,7 +55,7 @@ int main()
         case 2:
 
             // Display the passengers information.
-            PassengerInfo();
+            PassengerInfo(F1);
 
             cout << "<<< Press Return to Continue>>>" << endl;
             cin.get();
@@ -64,7 +64,7 @@ int main()
         case 3:
 
             // Add a new passenger.
-            AddPassanger();
+            AddPassanger(F1);
             cout << "<<< Press Return to Continue>>>" << endl;
             cin.get();
             break;
@@ -72,7 +72,7 @@ int main()
         case 4:
 
             // Remove an existing passenger.
-            RemovePassanger();
+            RemovePassanger(F1);
             cout << "<<< Press Return to Continue>>>" << endl;
             cin.get();
             break;
@@ -80,7 +80,7 @@ int main()
         case 5:
 
             // Save the data.
-            Save();
+            Save(F1);
             cout << "<<< Press Return to Continue>>>" << endl;
             cin.get();
             break;
@@ -120,22 +120,61 @@ void ChoicePage(int *UserInput)
 }
 
 Flight populate_flight (char * file){
-    #if 0
-    //should be every 20 character 
     ifstream in;
-    in.open(file, ios::in);
-    if (in.fail()){
+	in.open(file, ios::in);
+    
+	if (in.fail()) {
         cout <<"Error opening file...quitting\n";
         exit(1);
-    }
-    do{
-        in.get(s,'21','\n');
-        if(int.eof())break; 
-        fname = s;
-        fname = (string) trimtraling_spaces(fname); //removes the trailing spaces 
-    }
-    #endif
-}
+	}
+        in.getline(s0, 7, '\n');
+		string FlightNum = (string) s0;
+		in.seekg(6, std::ios::beg);
+
+        in.getline(r, 3, '\n');
+		int FlightTrow = (int) r;
+		in.seekg(2, std::ios::cur);
+
+        in.getline(c, 2, '\n');
+		int FlightTcol = (int) c;
+		in.seekg(1, std::ios::cur);
+
+        Flight F1(FlightNum, FlightTrow, FlightTcol);
+	do {
+        
+        //FName
+		in.getline(s1, 21, '\n');
+		string fname;
+		fname = (string) trimtraling_spaces(s1);
+		in.seekg(20, std::ios::cur);
+		
+		//LName
+		in.getline(s2, 21, '\n');
+		string lname;
+		lname = (string) trimtraling_spaces(s2);
+		in.seekg(20, std::ios::cur);
+		
+		//Phone
+		in.getline(s3, 13, '\n');
+		string phone;
+		phone = (string) trimtraling_spaces(s3);
+		in.seekg(12, std::ios::cur);
+		
+		//Seat
+		in.getline(s4, 3, '\n');
+		int rowS = (int) s4[0];
+		int colS = (int) s4[1] - 65;
+		in.seekg(2, std::ios::cur);
+		
+		//ID Number
+		in.getline(s5, 6, '\n');
+		int idnum = (int) s5;
+		in.seekg(5, std::ios::cur);
+        Passenger newpassenger(fname, lname, phone, idnum, rowS, colS);
+        F1.addPassenger(newpassenger);
+	} while(!in.eof());
+    return F1;
+   }
 
 
 
@@ -189,11 +228,11 @@ void SeatMap() {
         }
         cout<<endl;
 }
-void PassengerInfo(){
+void PassengerInfo(Flight& SkyCar){
     
 }
 
-void AddPassanger(){
+void AddPassanger(Flight& SkyCar){
     int idInput,phoneNum1,phoneNum2,phoneNum3,rowInput; 
     string FnameInput,LnameInput; 
     char colInput;
@@ -218,17 +257,17 @@ void AddPassanger(){
 
 
     Passenger newpassenger(FnameInput, LnameInput, fullPhoneNumber, idInput, rowInput, colInput);
-    //FlightName.addPassenger(newpassenger);
+    SkyCar.addPassenger(newpassenger);
 }
 
-void RemovePassanger(){
+void RemovePassanger(Flight& SkyCar){
     int IDInput; 
     cout << "Please enter the id of the passenger that needs to be removed: ";
     cin >> IDInput;
-    //FlightName.removePassenger(IDInput);
+    SkyCar.removePassenger(IDInput);
 }
 
-void Save(){
+void Save(Flight& SkyCar){
 //out<< iosflage(ios::left)
 //<<setw(20)<<fname;
 }
