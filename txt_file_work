@@ -1,0 +1,52 @@
+Flight populate_flight(char * file) {
+	   
+	   ifstream in;
+	   in.open("//FILE PATH//");
+	   
+	   if (in.fail()) {
+		cout <<"Error opening file...quitting\n";
+        exit(1);
+	   }
+	   
+	   size_t start_point = 0;
+	   size_t end_point = 
+	   do {
+		   
+		   //FName
+		   in.getline(s1, 21, '\n');
+		   fname = s1;
+		   fname = (string) trimtraling_spaces(fname);
+		   passenger.fname(fname);
+		   in.seekg(21, std::ios::beg);
+		   
+		   //LName
+		   in.getline(s2, 21, '\n');
+		   lname = s2;
+		   lname = (string) trimtraling_spaces(lname);
+		   passenger.lname(lname);
+		   in.seekg(21, std::ios::beg);
+		   
+		   //Phone
+		   in.getline(s3, 13, '\n');
+		   phone = s3;
+		   phone = (string) trimtraling_spaces(phone);
+		   passenger.phone(phone);
+		   in.seekg(21, std::ios::beg);
+		   
+		   //Seat
+		   in.getline(s4, 3, '\n');
+		   seat = s4
+		   rowS = s4[0];
+		   colS = s4[1];
+		   seat = (string) trimtraling_spaces(seat);
+		   passenger.Seat(<int> rowS, <char> colS);
+		   in.seekg(21, std::ios::beg);
+		   
+		   //ID Number
+		   in.getline(s5, 7, '\n');
+		   idnum = s5;
+		   idnum = (string) trimtraling_spaces(idnum);
+		   passenger.id(idnum);
+		   in.seekg(7, std::ios::beg);
+	   } while(!in.eof());
+   }
