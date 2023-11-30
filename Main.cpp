@@ -222,7 +222,10 @@ void AddPassanger(){
 }
 
 void RemovePassanger(){
-
+    int IDInput; 
+    cout << "Please enter the id of the passenger that needs to be removed: ";
+    cin >> IDInput;
+    //FlightName.removePassenger(IDInput);
 }
 
 void Save(){
