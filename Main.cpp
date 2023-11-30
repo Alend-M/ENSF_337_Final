@@ -23,9 +23,6 @@ void Save();
 
 int main()
 {
-    string fname, lname, phone;
-    int row;
-    char col;
     int UserInput;
     cout << "\nVersion 1.0" << endl;
     cout << "Term Project - Flight Management Program in C++" << endl;
@@ -144,7 +141,7 @@ Flight populate_flight (char * file){
 
 void SeatMap() {
     //vector<vector<int>> seatmap = //NAMEOFFLIGHT//.get_seatmap();    //THIS GRABS THE VECTOR WE NEED FILE READ TO WORK THO!
-    #if 0
+    #if 1
     vector<vector<int>> seatmap;
     seatmap.resize(6, vector<int>(4)); // Create a 6x4 vector of integers
 
@@ -197,7 +194,31 @@ void PassengerInfo(){
 }
 
 void AddPassanger(){
+    int idInput,phoneNum1,phoneNum2,phoneNum3,rowInput; 
+    string FnameInput,LnameInput; 
+    char colInput;
 
+    // Get user input
+    cout << "Please enter the passenger ID: ";
+    cin >> idInput;
+    cout << "Please enter the passenger's first name: ";
+    cin >> FnameInput;
+    cout << "Please enter the passenger's last name: ";
+    cin >> LnameInput;
+    cout << "Please enter the passenger's phone number: ";
+    cin >> phoneNum1 >> phoneNum2 >> phoneNum3;
+    cout <<endl;
+    cout << "Please enter the passenger's desired row: ";
+    cin >> rowInput;
+    cout << "Please enter the passenger's desired seat: ";
+    cin >> colInput;
+
+    string fullPhoneNumber = "";
+    fullPhoneNumber += to_string(phoneNum1) + "-" + to_string(phoneNum2) + "-" + to_string(phoneNum3);
+
+
+    Passenger newpassenger(FnameInput, LnameInput, fullPhoneNumber, idInput, rowInput, colInput);
+    //FlightName.addPassenger(newpassenger);
 }
 
 void RemovePassanger(){
