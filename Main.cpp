@@ -18,8 +18,7 @@ void PassengerInfo(Flight& SkyCar);
 void AddPassanger(Flight& SkyCar);
 void RemovePassanger(Flight& SkyCar);
 void Save(Flight& SkyCar);
-
-
+string trimtraling_spaces(const string& str);
 
 int main()
 {
@@ -35,7 +34,7 @@ int main()
     
     #if 1
     char file[] = "Flights.txt";
-    Flight F1 = populate_flight (*file);
+    Flight F1 = populate_flight(file);
     #endif
 
     //Main Program loop
@@ -119,7 +118,7 @@ void ChoicePage(int *UserInput)
     cin.get();
 }
 
-Flight populate_flight (char * file){
+Flight populate_flight (char* file){
     ifstream in;
 	in.open(file, ios::in);
     
@@ -127,53 +126,76 @@ Flight populate_flight (char * file){
         cout <<"Error opening file...quitting\n";
         exit(1);
 	}
-        in.getline(s0, 7, '\n');
+        char s0[10];
+        in.get(s0, 10);
 		string FlightNum = (string) s0;
-		in.seekg(6, std::ios::beg);
+        cout << FlightNum<< endl;
 
-        in.getline(r, 3, '\n');
-		int FlightTrow = (int) r;
-		in.seekg(2, std::ios::cur);
-
-        in.getline(c, 2, '\n');
-		int FlightTcol = (int) c;
+        char r[7];
+        in.get(r, 7);
+		int FlightTrow = atoi(r);
+        cout << FlightTrow << "DIS";
+    
+        char c[2];
+        in.get(c, 2);
+		int FlightTcol = atoi(c);
 		in.seekg(1, std::ios::cur);
+        cout<<FlightTcol<< endl; 
+
+        char s1[21];
+		in.get(s1, 21);
+		string fname;
+		fname = (string) trimtraling_spaces(s1);
+        cout << fname << endl;
 
         Flight F1(FlightNum, FlightTrow, FlightTcol);
+    #if 0
 	do {
-        
         //FName
+        char s1[21];
 		in.getline(s1, 21, '\n');
 		string fname;
 		fname = (string) trimtraling_spaces(s1);
 		in.seekg(20, std::ios::cur);
 		
 		//LName
+        char s2[21];
 		in.getline(s2, 21, '\n');
 		string lname;
 		lname = (string) trimtraling_spaces(s2);
 		in.seekg(20, std::ios::cur);
 		
 		//Phone
+        char s3[13];
 		in.getline(s3, 13, '\n');
 		string phone;
 		phone = (string) trimtraling_spaces(s3);
-		in.seekg(12, std::ios::cur);
+		in.seekg(20, std::ios::cur);
 		
 		//Seat
-		in.getline(s4, 3, '\n');
-		int rowS = (int) s4[0];
-		int colS = (int) s4[1] - 65;
-		in.seekg(2, std::ios::cur);
+        char s4[3];
+        char hold; 
+        int colS;
+		in.getline(s4, 4, '\n');
+        for(int i = 0; i < 3; i++){
+            if(48 <= s4[i] && s4[i] <= 57){
+                hold += s4[i];
+            }else{
+                colS = s4[i] - 65;
+            }
+        }
+		int rowS = hold - 48;
+		in.seekg(4, std::ios::cur);
 		
 		//ID Number
+        char s5[6];
 		in.getline(s5, 6, '\n');
-		int idnum = (int) s5;
-		in.seekg(5, std::ios::cur);
-        Passenger newpassenger(fname, lname, phone, idnum, rowS, colS);
-        F1.addPassenger(newpassenger);
+		int idnum = atoi(s5);
+        //Passenger newpassenger(fname, lname, phone, idnum, rowS, colS);
+        //F1.addPassenger(newpassenger);
 	} while(!in.eof());
     return F1;
+    #endif
    }
 
 
@@ -270,4 +292,13 @@ void RemovePassanger(Flight& SkyCar){
 void Save(Flight& SkyCar){
 //out<< iosflage(ios::left)
 //<<setw(20)<<fname;
+}
+
+string trimtraling_spaces(const string& str) {
+  int i = str.length() - 1;
+  while (i >= 0 && str[i] == ' ') {
+    i--;
+  }
+
+  return str.substr(0, i + 1);
 }
