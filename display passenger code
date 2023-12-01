@@ -1,5 +1,6 @@
 void PassengerInfo(passenger& Skycar) {
 	cout << left << setw(15) << "First Name" << setw(15) << "Last Name" << setw(20) << "Phone" << setw(7) << "Row" << setw(5) << "Seat" << right << setw(6) << "ID" << endl;
+	cout << "------------------------------------------------------------------" << endl;
 	
 	for (size_t i=0; i<Skycar.size(); i++) {
 		cout << left << setw(15) << Skycar[i].getFname() 
@@ -7,6 +8,8 @@ void PassengerInfo(passenger& Skycar) {
 			 << setw(20) << Skycar[i].getPhone()
 			 << right << setw(4) << Skycar[i].getSeat->row_S  
 			 << setw(5) << Skycar[i].getSeat->col_S        
-			 << setw(10) << Skycar[i].getID() << endl;      
+			 << setw(10) << Skycar[i].getID() << endl
+
+		cout << "------------------------------------------------------------------" << endl;
 	}	
 }
