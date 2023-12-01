@@ -6,6 +6,7 @@
         "vector": "cpp",
         "iterator": "cpp",
         "string": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "*.tcc": "cpp"
     }
 }

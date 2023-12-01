@@ -129,73 +129,72 @@ Flight populate_flight (char* file){
         char s0[10];
         in.get(s0, 10);
 		string FlightNum = (string) s0;
-        cout << FlightNum<< endl;
 
         char r[7];
         in.get(r, 7);
 		int FlightTrow = atoi(r);
-        cout << FlightTrow << "DIS";
     
         char c[2];
         in.get(c, 2);
 		int FlightTcol = atoi(c);
 		in.seekg(1, std::ios::cur);
-        cout<<FlightTcol<< endl; 
 
+        Flight F1(FlightNum, FlightTrow, FlightTcol);
+         
+	while(true){
+        //FName
         char s1[21];
 		in.get(s1, 21);
 		string fname;
 		fname = (string) trimtraling_spaces(s1);
-        cout << fname << endl;
+        //Breaks the loops once it hits the end of file
+        if(in.eof()){
+            break;
+        }
 
-        Flight F1(FlightNum, FlightTrow, FlightTcol);
-    #if 0
-	do {
-        //FName
-        char s1[21];
-		in.getline(s1, 21, '\n');
-		string fname;
-		fname = (string) trimtraling_spaces(s1);
-		in.seekg(20, std::ios::cur);
-		
 		//LName
         char s2[21];
-		in.getline(s2, 21, '\n');
+		in.get(s2, 21);
 		string lname;
 		lname = (string) trimtraling_spaces(s2);
-		in.seekg(20, std::ios::cur);
 		
 		//Phone
-        char s3[13];
-		in.getline(s3, 13, '\n');
+        char s3[21];
+		in.get(s3, 21);
 		string phone;
 		phone = (string) trimtraling_spaces(s3);
-		in.seekg(20, std::ios::cur);
 		
+
 		//Seat
-        char s4[3];
-        char hold; 
+        char s4[4];
+        int hold = 0; 
         int colS;
-		in.getline(s4, 4, '\n');
+		in.get(s4, 4);
         for(int i = 0; i < 3; i++){
             if(48 <= s4[i] && s4[i] <= 57){
-                hold += s4[i];
+                if(hold == 0 ){
+                    hold = s4[i]- 48;
+                }else{
+                hold = (hold * 10) + (s4[i] - 48);
+                }
             }else{
-                colS = s4[i] - 65;
+                if(65 <= s4[i] && s4[i] <= 90){
+                    colS = s4[i] - 64;
+                }
             }
         }
-		int rowS = hold - 48;
-		in.seekg(4, std::ios::cur);
-		
+		int rowS = hold;
+
 		//ID Number
-        char s5[6];
-		in.getline(s5, 6, '\n');
+        char s5[7];
+		in.get(s5, 7);
 		int idnum = atoi(s5);
-        //Passenger newpassenger(fname, lname, phone, idnum, rowS, colS);
-        //F1.addPassenger(newpassenger);
-	} while(!in.eof());
+
+        in.seekg(1, std::ios::cur);
+        Passenger newpassenger(fname, lname, phone, idnum, rowS, colS);
+        F1.addPassenger(newpassenger);
+	}
     return F1;
-    #endif
    }
 
 

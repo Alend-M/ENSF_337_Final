@@ -20,7 +20,7 @@ class Flight{
 
     void set_Trows();
     void set_TColumns();
-    string addPassenger(Passenger newPassenger);
+    void addPassenger(Passenger newPassenger);
     void removePassenger(int IDnum);
     void set_Flight_Number(string newFlightNumber);
 
