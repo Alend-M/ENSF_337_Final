@@ -14,7 +14,7 @@ using namespace std;
 
 Flight populate_flight (char * file);
 void ChoicePage(int *UserInput);
-void SeatMap();
+void SeatMap(Flight& SkyCar);
 void PassengerInfo(Flight& SkyCar);
 void AddPassanger(Flight& SkyCar);
 void RemovePassanger(Flight& SkyCar);
@@ -46,7 +46,7 @@ int main()
         {
         case 1:
             // Display the flight seat map.
-            SeatMap();
+            SeatMap(F1);
 
             cout << "<<< Press Return to Continue>>>" << endl;
             cin.get();
@@ -200,9 +200,9 @@ Flight populate_flight (char* file){
 
 
 
-void SeatMap() {
-    //vector<vector<int>> seatmap = //NAMEOFFLIGHT//.get_seatmap();    //THIS GRABS THE VECTOR WE NEED FILE READ TO WORK THO!
-    #if 1
+void SeatMap(Flight& SkyCar) {
+    vector<vector<int>> seatmap = SkyCar.get_seatmap();    //THIS GRABS THE VECTOR WE NEED FILE READ TO WORK THO!
+    #if 0
     vector<vector<int>> seatmap;
     seatmap.resize(6, vector<int>(4)); // Create a 6x4 vector of integers
 
@@ -229,11 +229,15 @@ void SeatMap() {
             cout<<"---+";
         }
         cout<<endl;
-
-        cout << " " << row << " "<< "|";
+        if(row > 9){
+            cout << " " << row << "|";
+        }else{
+            cout << " " << row << " "<< "|";
+        }
+        
         for(int i = 0; i < seatmap[0].size(); i++){
             char a = ' ';
-            if(seatmap[row][col] == 1){
+            if(seatmap[row][col+1] == 1){
                 a = 'X';
             }
             //cout << row<< col;
