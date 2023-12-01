@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <iomanip>
 #include <iostream>
 #include <cstdlib>
 #include "Flight.h"
@@ -250,7 +251,21 @@ void SeatMap() {
         cout<<endl;
 }
 void PassengerInfo(Flight& SkyCar){
-    
+    vector<Passenger> passengers = SkyCar.get_PassengerList();
+
+	cout << left << setw(15) << "First Name" << setw(15) << "Last Name" << setw(20) << "Phone" << setw(7) << "Row" << setw(5) << "Seat" << right << setw(6) << "ID" << endl;
+	cout << "------------------------------------------------------------------" << endl;
+	
+	for (size_t i=0; i < passengers.size(); i++) {
+		cout << left << setw(15) << passengers[i].getFname() 
+			 << setw(15) << passengers[i].getLname()
+			 << setw(20) << passengers[i].getPhone()
+			 << right << setw(4) << passengers[i].getSeat().get_row() 
+			 << setw(5) << passengers[i].getSeat().get_col()        
+			 << setw(10) << passengers[i].getId() << endl;
+
+		cout << "------------------------------------------------------------------" << endl;
+	}	
 }
 
 void AddPassanger(Flight& SkyCar){
