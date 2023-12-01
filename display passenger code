@@ -2,12 +2,11 @@ void PassengerInfo(passenger& Skycar) {
 	cout << left << setw(15) << "First Name" << setw(15) << "Last Name" << setw(20) << "Phone" << setw(7) << "Row" << setw(5) << "Seat" << right << setw(6) << "ID" << endl;
 	
 	for (size_t i=0; i<Skycar.size(); i++) {
-		//use the for loop and addrees each of the thing though Skycar.getter function
 		cout << left << setw(15) << Skycar[i].getFname() 
 			 << setw(15) << Skycar[i].getLname()
 			 << setw(20) << Skycar[i].getPhone()
-			 << right << setw(4) << Skycar[i].getSeat->row  //not sure of the exact name for row
-			 << setw(5) << passenger[i].getSeat->col        //not sure of the exact name for column
-			 << setw(10) << Skycar[i].getID() << endl;      //requires a gettwer function of the ID in the passenger class
+			 << right << setw(4) << Skycar[i].getSeat->row_S  
+			 << setw(5) << Skycar[i].getSeat->col_S        
+			 << setw(10) << Skycar[i].getID() << endl;      
 	}	
 }
