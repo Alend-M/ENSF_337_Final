@@ -193,12 +193,10 @@ Flight populate_flight (char* file){
 
         in.seekg(1, std::ios::cur);
         Passenger newpassenger(fname, lname, phone, idnum, rowS, colS);
-        F1.addPassenger(newpassenger);
+        F1.addPassenger(newpassenger); 
 	}
     return F1;
    }
-
-
 
 void SeatMap(Flight& SkyCar) {
     vector<vector<int>> seatmap = SkyCar.get_seatmap();    //THIS GRABS THE VECTOR WE NEED FILE READ TO WORK THO!
@@ -257,18 +255,18 @@ void SeatMap(Flight& SkyCar) {
 void PassengerInfo(Flight& SkyCar){
     vector<Passenger> passengers = SkyCar.get_PassengerList();
 
-	cout << left << setw(15) << "First Name" << setw(15) << "Last Name" << setw(20) << "Phone" << setw(7) << "Row" << setw(5) << "Seat" << right << setw(6) << "ID" << endl;
-	cout << "------------------------------------------------------------------" << endl;
+	cout << left << setw(20) << "First Name" << setw(20) << "Last Name" << setw(20) << "Phone" << setw(7) << "Row" << setw(5) << "Seat" << right << setw(6) << "ID" << endl;
+	cout << "---------------------------------------------------------------------------------" << endl;
 	
 	for (size_t i=0; i < passengers.size(); i++) {
-		cout << left << setw(15) << passengers[i].getFname() 
-			 << setw(15) << passengers[i].getLname()
+		cout << left << setw(20) << passengers[i].getFname() 
+			 << setw(20) << passengers[i].getLname()
 			 << setw(20) << passengers[i].getPhone()
 			 << right << setw(4) << passengers[i].getSeat().get_row() 
-			 << setw(5) << passengers[i].getSeat().get_col()        
+			 << setw(5) << (char) (passengers[i].getSeat().get_col() + 64)     
 			 << setw(10) << passengers[i].getId() << endl;
 
-		cout << "------------------------------------------------------------------" << endl;
+		cout << "---------------------------------------------------------------------------------" << endl;
 	}	
 }
 
@@ -296,7 +294,7 @@ void AddPassanger(Flight& SkyCar){
     fullPhoneNumber += to_string(phoneNum1) + "-" + to_string(phoneNum2) + "-" + to_string(phoneNum3);
 
 
-    Passenger newpassenger(FnameInput, LnameInput, fullPhoneNumber, idInput, rowInput, colInput);
+    Passenger newpassenger(FnameInput, LnameInput, fullPhoneNumber, idInput, rowInput, (colInput- 64));
     SkyCar.addPassenger(newpassenger);
 }
 
@@ -308,8 +306,25 @@ void RemovePassanger(Flight& SkyCar){
 }
 
 void Save(Flight& SkyCar){
-//out<< iosflage(ios::left)
-//<<setw(20)<<fname;
+	ofstream out("Flights.txt");
+	if (out.fail()) {
+		cerr << "Error Opening File" << endl;
+		return;
+	}
+	
+	vector<Passenger> passengers = SkyCar.get_PassengerList();
+
+	out << SkyCar.get_Flight_Number() << "\t" << SkyCar.get_Trows() << "\t" << SkyCar.get_TColumns() << endl;
+	for (size_t i=0; i<passengers.size(); i++) {
+		out << passengers[i].getFname() << "\t"
+			<< passengers[i].getLname() << "\t"
+			<< passengers[i].getPhone() << "\t"
+			<< passengers[i].getSeat().get_row() + 1
+			<< passengers[i].getSeat().get_col()        
+			<< "\t" << passengers[i].getId() << endl;
+	}
+	
+	out.close();
 }
 
 string trimtraling_spaces(const string& str) {

@@ -39,37 +39,46 @@ void Flight::set_Flight_Number(string newFlightNumber) {
 }
 
 void Flight::addPassenger(Passenger newPassenger) {
+    bool breakout = false;
     for (vector<Passenger>::iterator it = passengers.begin(); it != passengers.end(); ++it) {
         //if id is already used on the flight return error
         if(newPassenger.getId() == it->getId()){
             cout <<"ID already taken!"<<endl;
-            break;
+            breakout = true;
         }
 
         //checks if the seat is alreadt occupied 
         if(newPassenger.getSeat().get_col() == it->getSeat().get_col() 
         && newPassenger.getSeat().get_row() == it->getSeat().get_row()){
             cout<< "Seat is already occupied!"<< endl;
-            break;
+            breakout = true;
         }
     }
 
+    if(breakout != true){
     //checks list of passangers from bottom to top. If adding
     for (vector<Passenger>::iterator it = passengers.begin(); it != passengers.end(); ++it) {
-        if (newPassenger.getId() > it->getId()) {
+        if (newPassenger.getId() < it->getId()) {
             // Insert the new passenger after the current passenger
             passengers.insert(it, newPassenger);
+            //breakout  = true;
             break; // Once inserted, stop iterating
         }
     }
      
-    // If Id is less than all passengers, insert to the beginning of the list
-    if (passengers.empty() || newPassenger.getId() < passengers.front().getId()) {
+    
+    if(passengers.empty()){
         passengers.insert(passengers.begin(), newPassenger);
+    }else{
+        // If Id is less than all passengers, insert to the beginning of the list
+        if (newPassenger.getId() > passengers.back().getId()) {
+            passengers.insert(passengers.end(), newPassenger);
+        }
     }
 
     //Puting row and col into seatmap
     seatmap[newPassenger.getSeat().get_row()][newPassenger.getSeat().get_col()] = 1;
+    }
 }
 
 
