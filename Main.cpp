@@ -306,25 +306,29 @@ void RemovePassanger(Flight& SkyCar){
 }
 
 void Save(Flight& SkyCar){
-	ofstream out("Flights.txt");
-	if (out.fail()) {
-		cerr << "Error Opening File" << endl;
-		return;
-	}
-	
-	vector<Passenger> passengers = SkyCar.get_PassengerList();
+    ofstream out("Flights.txt");
+    if (out.fail()) {
+        cerr << "Error Opening File" << endl;
+        return;
+    }
 
-	out << SkyCar.get_Flight_Number() << "\t" << SkyCar.get_Trows() << "\t" << SkyCar.get_TColumns() << endl;
-	for (size_t i=0; i<passengers.size(); i++) {
-		out << passengers[i].getFname() << "\t"
-			<< passengers[i].getLname() << "\t"
-			<< passengers[i].getPhone() << "\t"
-			<< passengers[i].getSeat().get_row() + 1
-			<< passengers[i].getSeat().get_col()        
-			<< "\t" << passengers[i].getId() << endl;
-	}
-	
-	out.close();
+    vector<Passenger> passengers = SkyCar.get_PassengerList();
+
+    out << setw(9) << left <<  SkyCar.get_Flight_Number() << setw(6)<< left << SkyCar.get_Trows() << SkyCar.get_TColumns();
+    string row_col_holder = "";
+    for (size_t i=0; i<passengers.size(); i++) {
+        row_col_holder.clear();
+        row_col_holder += to_string(passengers[i].getSeat().get_row());
+        row_col_holder += (char)(passengers[i].getSeat().get_col() + 64);
+
+        out <<endl << setw(20) << left << passengers[i].getFname()
+            << setw(20) << left << passengers[i].getLname()
+            << setw(20) << left << passengers[i].getPhone()
+            << setw(4) << left << row_col_holder
+            <<setw(5) << left << passengers[i].getId();
+    }
+
+    out.close();
 }
 
 string trimtraling_spaces(const string& str) {
