@@ -9,12 +9,12 @@ void Save(Flight& SkyCar){
 
 	out << SkyCar.get_Flight_Number() << "\t" << SkyCar.get_Trows() << "\t" << SkyCar.get_TColumns() << endl;
 	for (size_t i=0; i<passengers.size(); i++) {
-		out << passengers[i].getFname() << "\t"
-			<< passengers[i].getLname() << "\t"
-			<< passengers[i].getPhone() << "\t"
-			<< passengers[i].getSeat().get_row() + 1
+		out << setw(21) << left << passengers[i].getFname()
+			<< setw(21) << left << passengers[i].getLname()
+			<< setw(13) << left << passengers[i].getPhone()
+			<< setw(4) << left << passengers[i].getSeat().get_row() + 1
 			<< passengers[i].getSeat().get_col()        
-			<< "\t" << passengers[i].getId() << endl;
+			<< setw(7) << left << passengers[i].getId() << endl;
 	}
 	
 	out.close();
