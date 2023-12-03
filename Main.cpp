@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "Flight.h"
+#include "Airline.h"
 #include <fstream>
 using namespace std;
 //*****NOTES*****
@@ -32,11 +33,13 @@ int main()
     cin.get(); 
 
     //Pull data from file 
-    
-    #if 1
     char file[] = "Flights.txt";
+    string AirlineName = "WestJet";
     Flight F1 = populate_flight(file);
-    #endif
+
+    //Creates Airline
+    Airline A1(AirlineName, 1);
+    A1.addFlight(F1);
 
     //Main Program loop
     while (true)         

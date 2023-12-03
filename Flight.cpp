@@ -85,7 +85,8 @@ void Flight::addPassenger(Passenger newPassenger) {
 
 void Flight::removePassenger(int IDNum) {
     for (vector<Passenger>::iterator it = passengers.begin(); it != passengers.end(); ++it) {
-        if (it->getId() == IDNum) {   
+        if (it->getId() == IDNum) {  
+            seatmap[it->getSeat().get_row()][it->getSeat().get_col()] = 0;
             passengers.erase(it);
             break;
         }
